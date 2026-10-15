@@ -27,6 +27,18 @@ After connecting the website to the live Actor, focused Chrome checks passed for
 all Actor links, English/Vietnamese pricing and publication status, generated
 input handoff, mobile layout at 390px, and no JavaScript page errors.
 
+## Store artwork
+
+The existing vector mark was exported to 512×512 and 1024×1024 PNGs. A 1600×900
+product illustration explicitly labels its data as fictional. All images were
+visually inspected. The public GitHub preview asset returned HTTP 200 and the
+correct PNG signature. Actor build `0.1.4` (`TccbjNrreE0xRDR8H`) succeeded, and
+the official API confirmed the preview URL in the uploaded `.actor/README.md`,
+`isPublic: true`, and the unchanged USD 0.003 event price. Runtime code did not
+change, so no extra charged run was started. The immediate Store HTML check
+still returned the earlier README; visibility of the new image was not yet
+confirmed there. The Actor icon requires a separate Console upload.
+
 ## Run the checks
 
 After payout details were saved, Apify accepted the launch event price of

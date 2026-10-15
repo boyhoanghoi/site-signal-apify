@@ -9,10 +9,11 @@ Checked 15 October 2026.
 - Actor ID: `KgxuXmLMsWUuA8Jkw`
 - Actor Console: https://console.apify.com/actors/KgxuXmLMsWUuA8Jkw
 - Public Actor: https://apify.com/reliable_quatrain/business-website-contact-tech-scraper
-- Release build: `0.1.3`, successful live cloud run and saved exports.
+- Current build: `0.1.4` (`TccbjNrreE0xRDR8H`), succeeded after adding the illustrated README preview. Runtime code is unchanged from `0.1.3`, which passed live cloud runs and saved exports.
 - Website demo: https://sitesignal-business-enricher.yxinhhh18.chatgpt.site (owner-private preview).
 - Local project: `apify_tools/site-signal`.
 - Tests and benchmarks: [VALIDATION.md](VALIDATION.md).
+- Store icon and product preview: [BRAND_ASSETS.md](BRAND_ASSETS.md). The square Actor icon still requires upload through Publishing → Display information.
 
 ## Published and monetized
 
