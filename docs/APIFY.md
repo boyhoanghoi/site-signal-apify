@@ -22,7 +22,7 @@ create that input file before running the module directly.
 
 ```json
 {
-  "websites": [{"url": "https://www.python.org/"}],
+  "websites": ["https://plausible.io/"],
   "maxSites": 1,
   "maxPagesPerSite": 3,
   "respectRobots": true,
@@ -32,7 +32,9 @@ create that input file before running the module directly.
 
 The input is bounded: 1–1,000 websites, 1–5 pages per site, 1–10 concurrent sites,
 5–45 seconds per request and a minimum per-site pause of 0.25–10 seconds.
-`startUrls` and `webUrls` are accepted aliases for programmatic input.
+The Python CLI also accepts `{url: ...}` objects and `startUrls`/`webUrls` aliases.
+For Apify Console and the Actor REST input, use the documented `websites` array
+of URL strings so input-schema validation succeeds.
 
 ## Cloud build and smoke test
 

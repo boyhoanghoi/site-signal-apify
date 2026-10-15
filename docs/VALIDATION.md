@@ -10,7 +10,9 @@ This records observed tests, not a claim that all websites work.
 - Cloud run `6V8zcKKSDkanE3J5L` succeeded with exit code 0: 3 completed domains, 9 requests, 3 saved result rows. Observed platform cost: USD 0.0023162062. Runtime about 96 seconds; the crawler honored a site's published crawl delay.
 - A run by the owner's account before paid pricing was enabled is not customer revenue. No first sale or income is claimed.
 
-The source changed after the first cloud test to add extraction caps and a Klaviyo signature; the release is rebuilt and rechecked before handover. Tests and costs from this small sample do not predict all-site costs, success rates, or sales.
+Release build `0.1.3` (`67xwhBwwFcVgK9gFK`) includes extraction caps, the Klaviyo signature and redirect/deduplication fixes. Its cloud run `xmIFy4g8olUI0ktzo` succeeded with 3 saved websites in approximately 4.45 seconds, with observed platform cost USD 0.0004479478. This faster sample uses Django, Plausible and Ghost rather than a site with a long crawl delay. Both runs used the owner's account before paid pricing; neither represents revenue. Tests and costs from this small sample do not predict all-site costs, success rates, or sales.
+
+GitHub Actions was triggered but no jobs started: GitHub returned "The job was not started because your account is locked due to a billing issue." Local checks above passed; remote CI is unverified until the account restriction is resolved.
 
 ## Run the checks
 
