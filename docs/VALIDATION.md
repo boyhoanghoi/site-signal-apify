@@ -16,6 +16,13 @@ GitHub Actions was triggered but no jobs started: GitHub returned "The job was n
 
 ## Run the checks
 
+After payout details were saved, Apify accepted the launch event price of
+USD 0.003. Paid-mode cloud run `ovMKN7v00twIRmfj0` succeeded in about 4.10 seconds:
+one public website was saved and recorded one `website-enriched` charge event;
+one private IP input was rejected before network access and produced only a
+nonbillable diagnostic. Observed platform cost was USD 0.0004252951. This is an
+owner-run integration test, not proof of a sale or earned revenue.
+
 ```powershell
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 node --test tests/web.test.mjs
