@@ -1,0 +1,7 @@
+{
+  "name": "sitesignal-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"check": "node --check dist/app.js"}
+}

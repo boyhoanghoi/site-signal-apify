@@ -1,0 +1,9 @@
+{
+  "title": "Website Contact & Tech Scraper | SiteSignal",
+  "description": "Extract public business emails, phones, social profiles and website technology signals. Source evidence for every finding, one row per website, failed domains free.",
+  "seoTitle": "Website Contact & Tech Scraper | SiteSignal",
+  "seoDescription": "Extract business website emails, phones, social profiles and CMS signals with page-level source evidence. Bulk JSON and CSV enrichment for agency and CRM workflows.",
+  "categories": ["LEAD_GENERATION", "BUSINESS", "DEVELOPER_TOOLS"],
+  "defaultRunOptions": {"build": "latest", "timeoutSecs": 300, "memoryMbytes": 512},
+  "actorPermissionLevel": "LIMITED_PERMISSIONS"
+}

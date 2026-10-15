@@ -1,0 +1,78 @@
+{
+  "title": "Enrich public business websites",
+  "description": "Enter business website URLs. SiteSignal reads a bounded number of public HTML pages and returns observed contacts with source evidence. It does not search for people, guess email addresses or verify deliverability.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "websites": {
+      "title": "Business website URLs",
+      "type": "array",
+      "description": "One public business website URL per line, up to 1,000 inputs. maxSites limits processed domains.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.djangoproject.com/",
+        "https://plausible.io/",
+        "https://ghost.org/"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "maxSites": {
+      "title": "Maximum websites",
+      "type": "integer",
+      "description": "Maximum number of unique websites to process. Your run spending limit may reduce this further.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "maxPagesPerSite": {
+      "title": "Maximum pages per website",
+      "type": "integer",
+      "description": "Homepage plus same-site contact/support pages, up to this limit. More pages can find more public contacts but take longer.",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 5
+    },
+    "includeTechnology": {
+      "title": "Detect website technologies",
+      "type": "boolean",
+      "description": "Look for recognizable CMS, ecommerce, analytics and payment signatures in fetched HTML. Detection is observational and may be incomplete.",
+      "default": true
+    },
+    "respectRobots": {
+      "sectionCaption": "Crawl limits",
+      "title": "Respect robots.txt",
+      "type": "boolean",
+      "description": "Enabled by default. Pages excluded by robots.txt are skipped and reported in diagnostics.",
+      "default": true
+    },
+    "concurrency": {
+      "title": "Concurrent websites",
+      "type": "integer",
+      "description": "Maximum websites in progress at once. Each site's pages are fetched sequentially.",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 10
+    },
+    "timeoutSeconds": {
+      "title": "Request timeout in seconds",
+      "type": "integer",
+      "description": "Timeout for each HTTP request. Unreachable sites produce diagnostics, not billable rows.",
+      "default": 20,
+      "minimum": 5,
+      "maximum": 45
+    },
+    "minDelaySeconds": {
+      "title": "Minimum delay between requests to one website",
+      "type": "number",
+      "description": "Minimum per-site pause in seconds. Robots crawl-delay may require a longer pause.",
+      "default": 0.5,
+      "minimum": 0.25,
+      "maximum": 10
+    }
+  },
+  "required": [
+    "websites"
+  ]
+}

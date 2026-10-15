@@ -1,0 +1,14 @@
+.venv
+.git
+.openai
+dist
+docs
+tests
+scripts
+output
+artifacts
+node_modules
+storage
+**/__pycache__
+**/*.egg-info
+.env*

@@ -1,0 +1,7 @@
+{
+  "websites": ["https://www.python.org", "https://www.djangoproject.com", "https://www.eff.org", "https://wordpress.org", "https://plausible.io", "https://ghost.org"],
+  "maxPagesPerSite": 3,
+  "maxSites": 6,
+  "concurrency": 3,
+  "respectRobots": true
+}

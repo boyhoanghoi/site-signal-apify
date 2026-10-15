@@ -1,0 +1,17 @@
+.venv/
+.git/
+.openai/
+.github/
+dist/
+docs/
+tests/
+scripts/
+output/
+artifacts/
+node_modules/
+storage/
+*.egg-info/
+__pycache__/
+*.pyc
+.env*
+package.json

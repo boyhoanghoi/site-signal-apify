@@ -1,0 +1,65 @@
+{
+  "actorSpecification": 1,
+  "title": "One successful public business website per row",
+  "description": "Emails and phones are published observations, not verified contacts. Empty arrays mean none found within the crawl limit. Each observed contact and technology has source evidence.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "url": {"type": "string", "title": "Website", "description": "Requested business website URL."},
+      "finalUrl": {"type": "string", "title": "Final homepage URL"},
+      "domain": {"type": "string", "title": "Normalized domain"},
+      "companyName": {"type": "string", "title": "Published business name", "description": "Name from Organization JSON-LD or Open Graph site name; empty when unavailable."},
+      "title": {"type": "string", "title": "Page title"},
+      "description": {"type": "string", "title": "Website description"},
+      "emails": {"type": "array", "title": "Observed emails", "description": "Public mailto, visible-text or Organization JSON-LD addresses. No deliverability verification.", "items": {"type": "string"}},
+      "phones": {"type": "array", "title": "Observed phone numbers", "description": "Numbers from tel links and Organization JSON-LD. No location inference or verification.", "items": {"type": "string"}},
+      "socials": {"type": "object", "title": "Social profile URLs", "description": "Known-platform profile links, normalized and deduplicated. Share/intent endpoints are excluded."},
+      "contactPageUrls": {"type": "array", "title": "Contact pages", "items": {"type": "string"}},
+      "contactFormUrls": {"type": "array", "title": "Pages containing contact forms", "items": {"type": "string"}},
+      "technologies": {"type": "array", "title": "Observed website technologies", "description": "Conservative HTML signatures; names, category, evidence and sourceUrl are included.", "items": {"type": "object"}},
+      "evidence": {"type": "array", "title": "Source evidence", "description": "Each entry includes type, value, sourceUrl and extraction method.", "items": {"type": "object"}},
+      "language": {"type": "string", "title": "Declared page language"},
+      "jsonLdTypes": {"type": "array", "title": "Schema.org types", "items": {"type": "string"}},
+      "pagesChecked": {"type": "integer", "title": "HTML pages read"},
+      "pagesVisited": {"type": "array", "title": "Source pages read", "items": {"type": "string"}},
+      "observedAt": {"type": "string", "title": "Observation time in UTC"},
+      "status": {"type": "string", "title": "Extraction status"},
+      "warnings": {"type": "array", "title": "Crawl warnings", "items": {"type": "string"}},
+      "hasPublicEmail": {"type": "boolean", "title": "Has observed public email"},
+      "hasContactForm": {"type": "boolean", "title": "Has observed contact form"}
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Business contacts",
+      "transformation": {"fields": ["url", "companyName", "emails", "phones", "socials", "contactPageUrls", "pagesChecked"]},
+      "display": {
+        "component": "table",
+        "properties": {
+          "url": {"label": "Website", "format": "link"},
+          "companyName": {"label": "Business name", "format": "text"},
+          "emails": {"label": "Observed emails", "format": "array"},
+          "phones": {"label": "Observed phones", "format": "array"},
+          "socials": {"label": "Social profiles", "format": "object"},
+          "contactPageUrls": {"label": "Contact pages", "format": "array"},
+          "pagesChecked": {"label": "Pages read", "format": "number"}
+        }
+      }
+    },
+    "evidence": {
+      "title": "Evidence & technologies",
+      "transformation": {"fields": ["url", "title", "technologies", "evidence", "language", "jsonLdTypes", "contactFormUrls"]},
+      "display": {
+        "component": "table",
+        "properties": {
+          "url": {"format": "link"},
+          "technologies": {"format": "array"},
+          "evidence": {"format": "array"},
+          "jsonLdTypes": {"format": "array"},
+          "contactFormUrls": {"format": "array"}
+        }
+      }
+    }
+  }
+}
+

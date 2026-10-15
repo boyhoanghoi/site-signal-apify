@@ -1,0 +1,17 @@
+{
+  "pricingInfos": [{
+    "pricingModel": "PAY_PER_EVENT",
+    "pricingPerEvent": {
+      "actorChargeEvents": {
+        "website-enriched": {
+          "eventTitle": "Website enriched",
+          "eventDescription": "One unique website successfully processed, up to the selected page limit. Contacts may be empty when none are published. Failed, blocked and duplicate-redirect websites are not charged.",
+          "eventPriceUsd": 0.003,
+          "isPrimaryEvent": true,
+          "isOneTimeEvent": false
+        }
+      }
+    },
+    "minimalMaxTotalChargeUsd": 0.003
+  }]
+}

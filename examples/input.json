@@ -1,0 +1,14 @@
+{
+  "websites": [
+    "https://www.djangoproject.com/",
+    "https://plausible.io/",
+    "https://ghost.org/"
+  ],
+  "maxPagesPerSite": 3,
+  "maxSites": 100,
+  "concurrency": 3,
+  "timeoutSeconds": 20,
+  "respectRobots": true,
+  "minDelaySeconds": 0.5,
+  "includeTechnology": true
+}

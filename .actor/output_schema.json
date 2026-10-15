@@ -1,0 +1,33 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "SiteSignal enrichment results",
+  "description": "Successful website rows are in the default dataset. Failed/skipped URLs are nonbillable diagnostics. Observed contacts are not verified for deliverability.",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "Enriched websites",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "csv": {
+      "type": "string",
+      "title": "Download spreadsheet-safe CSV",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/results.csv"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    },
+    "diagnostics": {
+      "type": "string",
+      "title": "Skipped and failed URLs",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/DIAGNOSTICS"
+    },
+    "report": {
+      "type": "string",
+      "title": "Complete JSON report",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT"
+    }
+  }
+}
+
