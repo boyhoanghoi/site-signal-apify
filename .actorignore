@@ -8,6 +8,7 @@ tests/
 scripts/
 output/
 artifacts/
+assets/
 node_modules/
 storage/
 *.egg-info/

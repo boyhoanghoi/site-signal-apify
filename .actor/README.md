@@ -4,6 +4,8 @@ Turn a list of business websites into structured contact and technology
 profiles, with source links you can check. One row per domain, ready for CRM
 enrichment, partner research or spreadsheet review.
 
+![SiteSignal preview: public contact fields, technology signals and source evidence. Fictional sample data.](https://raw.githubusercontent.com/boyhoanghoi/site-signal-apify/main/assets/brand/sitesignal-store-preview.png)
+
 ## What SiteSignal extracts
 
 - Public email addresses from mailto links, visible text and Organization JSON-LD.
