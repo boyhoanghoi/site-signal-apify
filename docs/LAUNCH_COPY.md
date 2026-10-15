@@ -1,12 +1,12 @@
 # SiteSignal — bản nháp nội dung ra mắt
 
-Nội dung bên dưới là bản nháp. Chỉ dùng mô tả đúng tính năng bản phát hành đã kiểm thử. Thay các placeholder bằng URL thật sau khi deploy; không đăng nguyên placeholder. Chưa có tuyên bố khách hàng, doanh thu hoặc đánh giá nào.
+Nội dung giới thiệu bên dưới là bản nháp để chủ dự án xem rồi tự đăng ở nơi cho phép. Actor đã công khai và monetization đang active ở **$3/1.000 domain thành công**. [Link Store chính thức](https://apify.com/reliable_quatrain/business-website-contact-tech-scraper). Chưa có doanh thu khách hàng được xác minh; không dùng lượt test của chủ tài khoản làm bằng chứng bán hàng. Website giới thiệu vẫn là preview riêng cho chủ sở hữu.
 
 ## Apify Store title
 
 **Website Contact & Tech Scraper | Emails, Socials, CMS**
 
-Tên sản phẩm: **SiteSignal**. Slug gợi ý: `website-contact-tech-scraper`.
+Tên sản phẩm: **SiteSignal**. Slug đã xuất bản: `business-website-contact-tech-scraper`, owner `reliable_quatrain`, Actor ID `KgxuXmLMsWUuA8Jkw`.
 
 ## Short description
 
@@ -32,7 +32,7 @@ Technology matches are evidence of a signature in the fetched page, not a comple
 
 ### How to use it
 
-1. Open the Actor's Input tab and add the business website URLs you want to process.
+1. Open [SiteSignal on Apify Store](https://apify.com/reliable_quatrain/business-website-contact-tech-scraper), then add the business website URLs in the Input tab.
 2. Start with a small page budget and a few domains.
 3. Run the Actor, inspect its dataset and check source links for a sample of the records.
 4. Export the dataset through Apify as JSON, CSV or Excel, or use the Actor API from your workflow.
@@ -83,9 +83,9 @@ Local processing does not activate Apify billing or publish the Actor. For remot
 
 ### Pricing
 
-Proposed launch pricing is **$3 per 1,000 successfully processed domains** ($0.003 each). The published Pricing tab is authoritative; this draft does not activate billing.
+Active pricing is **$3 per 1,000 successfully processed domains** ($0.003 each), using the **`website-enriched`** event. Check the published Pricing tab for the current tariff before running.
 
-One successfully processed website produces one billing event. An accessible website may publish no email; an empty email list is still a completed extraction. Failed or blocked websites are reported separately and are not billed as successful domains. Check the released implementation and Pricing tab for the exact event and configured price before publishing this section.
+One successfully processed website produces one billing event. An accessible website may publish no email; an empty email list is still a completed extraction. Failed or blocked websites are reported separately and are not billed as successful domains. Duplicate domains and duplicate final-domain redirects are not charged twice.
 
 ### Limitations
 
@@ -105,9 +105,9 @@ Mình làm SiteSignal cho việc bổ sung thông tin từ danh sách website do
 
 Tool đọc HTML và crawl nông; website dùng JavaScript hoặc chặn crawler có thể không lấy được. Không xác minh email có nhận thư hay không.
 
-Mình đang tìm phản hồi từ người có workflow CRM/Excel thực tế. Nếu cộng đồng cho phép, bạn có thể thử vài domain và cho mình biết cột nào hữu ích, cột nào còn sai. Giá và điều kiện tính phí nằm ở tab Pricing của Actor.
+Actor đã công khai, giá **$3/1.000 domain xử lý thành công**, không tính phí cho website lỗi hoặc bị chặn. Website đọc được nhưng không có email vẫn là kết quả hoàn tất. Mình đang tìm phản hồi từ người có workflow CRM/Excel thực tế: cột nào hữu ích, cột nào còn sai? Xem tab Pricing trước khi chạy.
 
-Link Actor: `[THAY_BANG_URL_STORE_THAT]`
+Link Actor: https://apify.com/reliable_quatrain/business-website-contact-tech-scraper
 
 ## English launch post
 
@@ -117,6 +117,8 @@ The first version uses a shallow HTML crawl. It can miss JavaScript-rendered det
 
 If you already enrich CRM or spreadsheet records, I would appreciate feedback on a small test with your own website list: which fields save you time, and where does the output need correction?
 
-Actor: `[REPLACE_WITH_LIVE_STORE_URL]`
+The Actor is public at **$3 per 1,000 successfully processed domains**. Failed or blocked websites are not billed. A successfully read website with no public email still counts as a completed extraction; see the Pricing tab before running.
+
+Actor: https://apify.com/reliable_quatrain/business-website-contact-tech-scraper
 
 Chỉ đăng bài trong nơi cho phép self-promotion hoặc kênh bạn sở hữu. Không sử dụng danh sách email trích xuất để quảng cáo tool hàng loạt.

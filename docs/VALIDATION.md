@@ -14,6 +14,19 @@ Release build `0.1.3` (`67xwhBwwFcVgK9gFK`) includes extraction caps, the Klaviy
 
 GitHub Actions was triggered but no jobs started: GitHub returned "The job was not started because your account is locked due to a billing issue." Local checks above passed; remote CI is unverified until the account restriction is resolved.
 
+## Store publication and website handoff
+
+Publication was confirmed on 15 October 2026: the authenticated Actor API and an
+unauthenticated public API request both returned `isPublic: true`. The public
+[Store listing](https://apify.com/reliable_quatrain/business-website-contact-tech-scraper)
+returned HTTP 200 with the correct Actor title. The active event price remains
+USD 0.003 per successful website. This confirms availability, not customer use or
+revenue; identity approval has not been independently confirmed.
+
+After connecting the website to the live Actor, focused Chrome checks passed for
+all Actor links, English/Vietnamese pricing and publication status, generated
+input handoff, mobile layout at 390px, and no JavaScript page errors.
+
 ## Run the checks
 
 After payout details were saved, Apify accepted the launch event price of

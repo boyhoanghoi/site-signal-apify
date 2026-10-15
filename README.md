@@ -2,6 +2,8 @@
 
 Turn a list of company websites into contact and technology records with page-level evidence. Built for agencies, researchers, and CRM workflows. Python CLI, Apify Actor, and a browser-based product demo are included.
 
+[Run on Apify Store](https://apify.com/reliable_quatrain/business-website-contact-tech-scraper) · $0.003 per successfully processed website ($3/1,000). Check the listing for current terms. Failed, blocked and duplicate-redirect websites are not charged; a completed website can have no public contacts.
+
 Only information publicly published by the website is extracted. Email delivery is not verified. Protected or JavaScript-only pages may not yield results. Respect website rules and applicable laws; this tool does not send messages.
 
 ## Run locally

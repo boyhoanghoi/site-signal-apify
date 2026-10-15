@@ -1,6 +1,6 @@
 # Phạm vi và giới hạn của SiteSignal
 
-Tài liệu bàn giao cho chủ dự án. Mô tả tính năng cuối cùng phải khớp bản release và README; tài liệu không chứng minh Actor đã được publish hoặc bật thu phí.
+Tài liệu bàn giao cho chủ dự án. [Actor đã công khai trên Apify Store](https://apify.com/reliable_quatrain/business-website-contact-tech-scraper), được xác nhận bằng API chính thức (`isPublic: true`) và Console. PPE **`website-enriched` ở giá $0.003/domain thành công ($3/1.000)** đang active. Chưa có doanh thu khách hàng được xác minh. Website giới thiệu là preview riêng cho chủ sở hữu; trạng thái Store không thay đổi quyền xem website.
 
 ## Ý nghĩa của kết quả
 
@@ -30,8 +30,8 @@ Không commit token, file `.env`, thông tin PayPal, giấy tờ KYC hoặc dữ
 
 ## Thu phí và giới hạn lời quảng cáo
 
-Giá `$3/1.000 domain` là giả thuyết ban đầu; cần được cấu hình thật trong Apify và đối chiếu sự kiện billing với code. Website đọc được nhưng không có email vẫn có thể là một domain đã xử lý; nêu rõ điều đó cho khách. Đầu vào sai, trùng lặp và trang không đọc được cần được xử lý theo quy tắc billing công bố, không tính ngầm như kết quả thành công.
+Giá `$3/1.000 domain` đã active trên Actor công khai, tính qua đúng sự kiện `website-enriched`. Website đọc được nhưng không có email vẫn có thể là một domain đã xử lý; nêu rõ điều đó cho khách. Đầu vào sai, trùng lặp và trang không đọc được không được tính ngầm như kết quả thành công. Kiểm tra lại giá Store và giới hạn charge khi phát hành bản mới; không thêm phí dataset/start ngoài mô hình đã công bố.
 
-Không công bố số khách, đánh giá, tỷ lệ thành công, benchmark tốc độ hoặc doanh thu khi chưa có bằng chứng. Gắn nhãn “đề xuất” cho mức giá chưa bật. Không hứa Google ranking, khách hàng tiềm năng mua hàng hoặc thu nhập thụ động.
+Không công bố số khách, đánh giá, tỷ lệ thành công, benchmark tốc độ hoặc doanh thu khi chưa có bằng chứng. Lượt chủ tài khoản chạy thử không phải doanh thu khách hàng. Mức giá đang active không cần gắn nhãn “đề xuất”; các thay đổi giá chưa được áp dụng vẫn phải ghi rõ trạng thái. Không hứa Google ranking, khách hàng tiềm năng mua hàng hoặc thu nhập thụ động.
 
-Chủ tài khoản tự đăng nhập, hoàn tất thông tin thanh toán và KYC. Chỉ đánh dấu đã deploy/publish khi có URL và run thành công để kiểm tra; chỉ đánh dấu đã nhận tiền khi có giao dịch thực tế. [Quy định nhận tiền chính thức](https://docs.apify.com/actors/publishing/monetize/monthly-payouts).
+Thông tin payout billing đã lưu; hồ sơ KYC đã nộp và theo ảnh Console mới nhất vẫn **đang chờ xét duyệt**, với thời gian dự kiến **1–2 ngày làm việc** do Console hiển thị. Chủ tài khoản tự theo dõi và bổ sung thông tin nếu được yêu cầu. Chỉ đánh dấu đã nhận tiền khi có giao dịch thực tế. Công khai Actor và billing active không đồng nghĩa KYC đã duyệt hoặc đạt ngưỡng rút. [Quy định nhận tiền chính thức](https://docs.apify.com/actors/publishing/monetize/monthly-payouts).

@@ -1,22 +1,24 @@
 # Kế hoạch đạt doanh thu đầu tiên với SiteSignal
 
-Mục tiêu là có **người dùng thật trả tiền cho Actor hữu ích**. Không có cam kết thời hạn hay thu nhập. Website giới thiệu và mã nguồn không tự tạo doanh thu; Actor cần được xuất bản, bật billing đúng và có khách dùng.
+Mục tiêu là có **người dùng thật trả tiền cho Actor hữu ích**. Không có cam kết thời hạn hay thu nhập. [SiteSignal đã công khai trên Apify Store](https://apify.com/reliable_quatrain/business-website-contact-tech-scraper), với PPE **`website-enriched` ở mức $0.003/domain thành công ($3/1.000)** đang active. Trạng thái public được xác nhận qua API chính thức và Console. Chưa có doanh thu khách hàng được xác minh; lượt chủ tài khoản chạy thử không phải bán hàng.
+
+Theo ảnh Console mới nhất, hồ sơ xác minh danh tính đã nộp và đang chờ xét duyệt; Console hiển thị dự kiến **1–2 ngày làm việc**. Có Actor công khai và billing active không đồng nghĩa đã đủ điều kiện nhận payout.
 
 ## Trước khi nhận khách
 
 1. Chạy local và kiểm thử theo README gốc. Chọn 20–30 website mẫu công khai, kiểm tra thủ công kết quả và bằng chứng. Ghi riêng trang bị chặn, trang chỉ có form và trang dùng JavaScript.
 2. Đăng nhập tài khoản Apify của bạn. Nếu môi trường chưa xác thực, dùng `apify login` tại máy của bạn; không gửi token hoặc giấy tờ qua chat và không commit bí mật vào GitHub.
-3. Deploy Actor theo README; chạy thử bằng tài khoản của bạn, đọc log và kiểm tra CSV/JSON. Chỉ công bố link Store sau khi link thực sự hoạt động.
-4. Trong Actor → Publishing, cấu hình monetization PPE. Giá **đề xuất**, chưa mặc định được bật chỉ vì có trong tài liệu: `$0.003` cho mỗi domain xử lý thành công, tức `$3/1.000`. Tên sự kiện billing phải khớp code. Kiểm tra giới hạn số kết quả và giới hạn charge hoạt động.
+3. Khi cập nhật bản mới, deploy Actor theo README; chạy thử bằng tài khoản của bạn, đọc log và kiểm tra CSV/JSON. Có thể chia sẻ [link Store đã xuất bản](https://apify.com/reliable_quatrain/business-website-contact-tech-scraper) ngay; không coi test của mình là khách mua.
+4. Trong Actor → Publishing → Monetization, kiểm tra giá đang active: **`website-enriched`, `$0.003` cho mỗi domain xử lý thành công**. Không cần bật lại hoặc tạo thêm sự kiện để bắt đầu bán. Khi tái tạo trên Actor khác, cấu hình đúng một sự kiện này rồi kiểm tra giới hạn số kết quả và giới hạn charge.
 5. Đối chiếu bảng giá Store với lượt chạy thực tế: trùng domain không tính hai lần; đầu vào lỗi và website không đọc được không phát sinh sự kiện trả phí. Website đọc thành công nhưng không công khai email vẫn là một kết quả đã xử lý; mô tả rõ trước khi thu tiền.
 
-Tham khảo [thiết lập monetization của Apify](https://docs.apify.com/actors/monetize/set-up-monetization). Trạng thái publish/billing phải được xác nhận trong Console; tài liệu này không thay thế bước đó.
+Tham khảo [thiết lập monetization của Apify](https://docs.apify.com/actors/monetize/set-up-monetization). Với các bản cập nhật sau này, đối chiếu trạng thái trong Console và giá hiển thị ở Store; không tự ý thêm phí startup hoặc phí dataset làm khách bị tính hai lần.
 
 ## Phân biệt $5 doanh thu, lợi nhuận và tiền rút
 
 Theo [cách Apify tính PPE](https://docs.apify.com/actors/publishing/monetize/pricing-and-costs), phần của tác giả được tính bằng `0.8 × doanh thu đủ điều kiện − chi phí nền tảng`. Lượt của khách gói Free không tạo doanh thu tác giả trong phép tính này. Vì vậy, lượt thử miễn phí giúp kiểm chứng sản phẩm nhưng không được cộng nhầm thành tiền kiếm được.
 
-Với giá giả định `$0.003/domain`:
+Với giá đang active `$0.003/domain`, các mốc toán học là:
 
 | Mốc | Số domain thành công cần có |
 | --- | ---: |
@@ -30,8 +32,8 @@ Chi phí `$0.0005/domain` chỉ là **ví dụ toán học, chưa phải benchma
 
 ## Những việc chủ tài khoản phải tự hoàn tất
 
-- Điền thông tin billing hợp lệ và chọn phương thức thanh toán được hỗ trợ cho tài khoản của mình.
-- Tự thực hiện KYC trong Apify và thiết lập PayPal/Wise; kiểm tra tên, quốc gia, phí và khả năng nhận tiền của chính tài khoản.
+- Thông tin payout billing đã được lưu. Kiểm tra lại tính chính xác và phương thức thanh toán được hỗ trợ cho tài khoản của mình.
+- Hồ sơ KYC đang chờ xét duyệt. Theo dõi kết quả trong Apify, tự bổ sung giấy tờ nếu được yêu cầu và kiểm tra PayPal/Wise về tên, quốc gia, phí và khả năng nhận tiền. Không coi đã nộp hồ sơ là đã được duyệt.
 - Bảo quản token, bật xác thực tài khoản phù hợp, kiểm tra hóa đơn/lịch payout và xử lý nghĩa vụ thuế liên quan.
 
 Code có thể chuẩn bị deploy và billing nhưng không thay bạn xác minh danh tính hoặc tạo điều kiện thanh toán hợp lệ.

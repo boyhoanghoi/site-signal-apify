@@ -1,4 +1,4 @@
 export const publicConfig = Object.freeze({
-  actorUrl: null,
+  actorUrl: 'https://apify.com/reliable_quatrain/business-website-contact-tech-scraper',
   githubUrl: 'https://github.com/boyhoanghoi/site-signal-apify',
 });

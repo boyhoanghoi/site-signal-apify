@@ -2,9 +2,11 @@
 
 Ngày kiểm tra nguồn: **15/10/2026**. Đây là nghiên cứu ban đầu để chọn một Actor có thể bán, không phải dự báo doanh thu.
 
+Trạng thái triển khai: [SiteSignal đã công khai trên Apify Store](https://apify.com/reliable_quatrain/business-website-contact-tech-scraper), PPE **`website-enriched`, $0.003/domain thành công ($3/1.000)** đang active, được xác nhận qua API chính thức và Console. Chưa có doanh thu khách hàng được xác minh; lượt chủ tài khoản chạy thử không phải bằng chứng nhu cầu trả phí. KYC vẫn đang chờ xét duyệt theo ảnh Console mới nhất.
+
 ## Sản phẩm và khách hàng đầu tiên
 
-**SiteSignal — Website Contact, Social & Tech Extractor** nhận danh sách website doanh nghiệp và tạo bảng thông tin để bổ sung dữ liệu CRM: email công khai, điện thoại, mạng xã hội, dấu hiệu công nghệ và URL nguồn. Mỗi website có một kết quả, kể cả khi bị chặn hoặc không có email.
+**SiteSignal — Website Contact, Social & Tech Extractor** nhận danh sách website doanh nghiệp và tạo bảng thông tin để bổ sung dữ liệu CRM: email công khai, điện thoại, mạng xã hội, dấu hiệu công nghệ và URL nguồn. Website đọc thành công có một dòng dataset, kể cả khi không thấy email. Website lỗi, bị chặn hoặc được bỏ qua có diagnostics riêng, không được tính như kết quả thành công.
 
 Khách phù hợp để kiểm chứng: freelancer làm dữ liệu, agency web/marketing và người vận hành workflow n8n/Make đã có danh sách website. Họ cần tiết kiệm thời gian mở từng trang, chép thông tin và tìm lại nguồn. Actor không tự tìm danh sách khách, gửi email hoặc hứa tìm được người ra quyết định.
 
@@ -39,4 +41,4 @@ Số liệu dưới đây là những gì trang sản phẩm hiển thị khi ki
 3. Đo: tỷ lệ hoàn tất, thông tin sai, chi phí/100 domain, người quay lại và lượt chạy của khách gói trả phí. Không coi test của mình là khách hàng.
 4. Nếu không ai cần đầu ra, điều chỉnh một workflow cụ thể trước khi thêm tính năng. Nếu chặn/JavaScript là nhu cầu chính, phải tính lại giá và chi phí trước khi thêm trình duyệt.
 
-Giả thuyết giá ban đầu **$3/1.000 domain xử lý thành công** cần được đặt và kiểm tra trong Console. Kế hoạch tìm khách và phép tính trong [FIRST_5_DOLLARS.md](FIRST_5_DOLLARS.md).
+Mức giá **$3/1.000 domain xử lý thành công** đã active. Khả năng thu hút khách và biên lợi nhuận vẫn cần kiểm chứng bằng khách thật và chi phí thực tế. Kế hoạch tìm khách và phép tính trong [FIRST_5_DOLLARS.md](FIRST_5_DOLLARS.md); nguồn trạng thái phát hành trong [LAUNCH_STATUS.md](LAUNCH_STATUS.md).
