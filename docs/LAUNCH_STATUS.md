@@ -1,6 +1,6 @@
 # Launch handover
 
-Checked 15 October 2026.
+Checked 16 October 2026.
 
 ## Built and tested
 
@@ -9,11 +9,50 @@ Checked 15 October 2026.
 - Actor ID: `KgxuXmLMsWUuA8Jkw`
 - Actor Console: https://console.apify.com/actors/KgxuXmLMsWUuA8Jkw
 - Public Actor: https://apify.com/reliable_quatrain/business-website-contact-tech-scraper
-- Current build: `0.1.4` (`TccbjNrreE0xRDR8H`), succeeded after adding the illustrated README preview. Runtime code is unchanged from `0.1.3`, which passed live cloud runs and saved exports.
+- Current build: **`0.2.1`** (`dxpmKC8A3juk5mwpd`), **SUCCEEDED**. Built source commit: `e233aa66e99c1fdcc35d11c0679b845e65a914ac`; package version `0.2.0`.
 - Website demo: https://sitesignal-business-enricher.yxinhhh18.chatgpt.site (owner-private preview).
 - Local project: `apify_tools/site-signal`.
 - Tests and benchmarks: [VALIDATION.md](VALIDATION.md).
-- Store icon and product preview: [BRAND_ASSETS.md](BRAND_ASSETS.md). The square Actor icon still requires upload through Publishing → Display information.
+- Store icon and product preview: [BRAND_ASSETS.md](BRAND_ASSETS.md). The icon is already uploaded; the current official API returned a nonempty `pictureUrl`.
+
+## CRM exports and coverage release
+
+Build `0.2.1` adds flat company JSON/CSV for CRM field mapping, contact JSON/CSV
+with source URLs and extraction methods, and contact-page coverage diagnostics.
+Email case variants merge within one website while retaining evidence. Browser
+challenge pages are skipped; their known final URL and HTTP status are retained,
+including after redirects. No CRM is modified automatically.
+
+**43 Python tests passed**, including redirected contact-challenge diagnostics;
+the official Apify CLI validated input, dataset and output schemas, and
+`git diff --check` passed. See [CRM_WORKFLOW_VI.md](CRM_WORKFLOW_VI.md) and
+[UPGRADE_2026_10_16.md](UPGRADE_2026_10_16.md).
+
+Cloud smoke run **`93sgBsAEQ6ur53rPt`** succeeded on this build with a **$0.01**
+maximum total charge, 512 MB memory and a 180-second timeout. It tested Plausible
+plus a loopback URL and confirmed:
+
+- **1 saved website**, two HTML pages checked/attempted.
+- **1 company row** in both `CRM_COMPANIES` and `crm-companies.csv`.
+- **9 contact observations** in both `CONTACTS` and `contacts.csv`; source URLs
+  were present and belonged to pages actually visited.
+- The loopback URL produced only an `invalid_url` diagnostic and no saved row.
+- Final run metadata and `SUMMARY` agreed on exactly **1 `website-enriched`
+  event**. Alternate exports added no events.
+- Observed platform usage cost: **$0.0006226863** for this small owner test.
+
+Dataset: `z05xfNJjdfux2vPie`; key-value store: `X357k1DcvjtgyQlob`. Live content,
+counts and costs may change. This is an owner test, not a customer sale.
+
+An earlier budget probe, `FcmzUQ1zCD9SLcr2M`, used a $0.005 cap. At the active
+$0.003 event price, preflight correctly selected only the first input and saved
+one website with one event. The second input was omitted before fetching. Use
+$0.01 to select both inputs when testing this diagnostics path.
+
+The official API confirmed `latest` points to `dxpmKC8A3juk5mwpd`, `isPublic` is
+still true and active pricing exactly matches its predeployment configuration.
+Pricing/publication settings and the separate private website hosting were not
+changed. Structured release evidence is in [launch.json](launch.json).
 
 ## Published and monetized
 

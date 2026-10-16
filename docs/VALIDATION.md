@@ -2,6 +2,12 @@
 
 This records observed tests, not a claim that all websites work.
 
+Current release: build **0.2.1** passed **43 Python tests**, native input/dataset/
+output schema validation and a cloud smoke with one saved website, one company
+row, nine contacts and one `website-enriched` event. See
+[LAUNCH_STATUS.md](LAUNCH_STATUS.md) and [launch.json](launch.json) for current
+evidence. Sections below also preserve historical checks from earlier builds.
+
 - 35 Python tests passed: extraction, technology evidence, validation, DNS/IP boundaries, redirects, robots handling, spreadsheet CSV safety and Actor billing limits.
 - 7 Node tests passed: URL normalization, domain deduplication, input errors, export safety and demo evidence consistency.
 - 13 browser workflow assertions passed in installed Chrome via Playwright: filters, empty state, JSON inspection, CSV download, configuration generation, rejection of local URLs, EN/VI switching, mobile menu and no page overflow at 390px.
@@ -37,7 +43,8 @@ the official API confirmed the preview URL in the uploaded `.actor/README.md`,
 `isPublic: true`, and the unchanged USD 0.003 event price. Runtime code did not
 change, so no extra charged run was started. The immediate Store HTML check
 still returned the earlier README; visibility of the new image was not yet
-confirmed there. The Actor icon requires a separate Console upload.
+confirmed there at that earlier check. As of the 16 October 2026 release, the
+icon is uploaded and the official API confirms a nonempty `pictureUrl`.
 
 ## Run the checks
 

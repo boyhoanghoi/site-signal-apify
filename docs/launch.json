@@ -1,0 +1,61 @@
+{
+  "checkedOn": "2026-10-16",
+  "actorId": "KgxuXmLMsWUuA8Jkw",
+  "publicUrl": "https://apify.com/reliable_quatrain/business-website-contact-tech-scraper",
+  "githubUrl": "https://github.com/boyhoanghoi/site-signal-apify",
+  "sourceCommit": "e233aa66e99c1fdcc35d11c0679b845e65a914ac",
+  "packageVersion": "0.2.0",
+  "actorVersion": "0.2",
+  "buildId": "dxpmKC8A3juk5mwpd",
+  "buildNumber": "0.2.1",
+  "buildStatus": "SUCCEEDED",
+  "buildFinishedAt": "2026-10-16T11:33:55.739Z",
+  "latestTagVerified": true,
+  "pythonTestsPassed": 43,
+  "nativeSchemasValid": ["input", "dataset", "output"],
+  "smokeRun": {
+    "runId": "93sgBsAEQ6ur53rPt",
+    "status": "SUCCEEDED",
+    "maxTotalChargeUsd": 0.01,
+    "datasetId": "z05xfNJjdfux2vPie",
+    "keyValueStoreId": "X357k1DcvjtgyQlob",
+    "savedWebsites": 1,
+    "crmCompanyRows": 1,
+    "contactRows": 9,
+    "csvRows": {"contacts.csv": 9, "crm-companies.csv": 1},
+    "pagesChecked": 2,
+    "pagesAttempted": 2,
+    "diagnosticStatuses": ["invalid_url"],
+    "chargedEventCounts": {"website-enriched": 1},
+    "usageTotalUsd": 0.0006226863133261601,
+    "sourceProvenanceVerified": true,
+    "savedOnlyJsonAndCsvVerified": true,
+    "customerRevenue": false
+  },
+  "budgetProbe": {
+    "runId": "FcmzUQ1zCD9SLcr2M",
+    "maxTotalChargeUsd": 0.005,
+    "selectedDomains": 1,
+    "savedWebsites": 1,
+    "chargedEvents": 1,
+    "remainingInputOmittedBeforeFetch": true
+  },
+  "pricing": {
+    "event": "website-enriched",
+    "eventPriceUsd": 0.003,
+    "unchanged": true,
+    "additionalExportEvents": false
+  },
+  "isPublic": true,
+  "publicationSettingChanged": false,
+  "actorIconConfirmed": true,
+  "website": {
+    "url": "https://sitesignal-business-enricher.yxinhhh18.chatgpt.site",
+    "audience": "owner-private",
+    "hostingChanged": false
+  },
+  "verifiedCustomerRevenue": false,
+  "payoutApprovalRechecked": false,
+  "remoteCiVerified": false,
+  "promotionalMessagesSent": false
+}
