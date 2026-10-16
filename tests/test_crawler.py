@@ -8,7 +8,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from sitesignal.config import RunConfig
-from sitesignal.crawler import FetchError, Page, PublicResolver, crawl_sites, public_ip, same_site, validate_url
+from sitesignal.crawler import FetchError, Page, PublicResolver, crawl_site, crawl_sites, public_ip, same_site, validate_url
 from sitesignal.output import results_csv
 
 
@@ -51,6 +51,52 @@ class FakeClient:
 
 
 class CrawlerTests(unittest.IsolatedAsyncioTestCase):
+    async def test_cross_page_case_deduplication_preserves_each_source_and_input(self):
+        class CaseClient(FakeClient):
+            async def fetch(self, url, **kwargs):
+                body = '<a href="mailto:hello@acme-business.co">Email</a>' if url.endswith("/contact") else (
+                    '<a href="mailto:Hello@ACME-BUSINESS.CO">Email</a><a href="/contact">Contact us</a>')
+                return Page(url, body, 200, "text/html")
+        config = RunConfig.from_dict({"websites": ["https://acme-business.co/"], "maxPagesPerSite": 2})
+        result = await crawl_site(config.websites[0], config, CaseClient(config))
+        self.assertEqual(result["emails"], ["Hello@acme-business.co"])
+        evidence = [item for item in result["evidence"] if item["type"] == "email"]
+        self.assertEqual({item["sourceUrl"] for item in evidence}, {config.websites[0], config.websites[0] + "contact"})
+        self.assertEqual({item["value"] for item in evidence}, {"Hello@acme-business.co"})
+        self.assertEqual(result["pagesAttempted"], 2)
+        self.assertFalse(result["contactPageLimitReached"])
+
+    async def test_contact_page_failure_has_actionable_url_and_partial_coverage(self):
+        class BlockedContactClient(FakeClient):
+            async def fetch(self, url, **kwargs):
+                if url.endswith("/contact"):
+                    raise FetchError("blocked", "Website denied access.", 403)
+                return Page(url, '<a href="/contact">Contact</a><a href="/support">Support</a>', 200, "text/html")
+        config = RunConfig.from_dict({"websites": ["https://acme-business.co/"], "maxPagesPerSite": 2})
+        result = await crawl_site(config.websites[0], config, BlockedContactClient(config))
+        self.assertEqual(result["pagesChecked"], 1)
+        self.assertEqual(result["pagesAttempted"], 2)
+        self.assertTrue(result["contactPageLimitReached"])
+        failure = result["pageDiagnostics"][1]
+        self.assertEqual(failure["url"], "https://acme-business.co/contact")
+        self.assertEqual(failure["httpStatus"], 403)
+        self.assertEqual(failure["status"], "blocked")
+
+    async def test_contact_page_browser_challenge_is_not_a_successful_source(self):
+        class ChallengeClient(FakeClient):
+            async def fetch(self, url, **kwargs):
+                if url.endswith("/contact"):
+                    return Page("https://acme-business.co/contact-us", '<title>Just a moment...</title><p>fake@acme-business.co</p>', 200, "text/html")
+                return Page(url, '<a href="/contact">Contact</a>', 200, "text/html")
+        config = RunConfig.from_dict({"websites": ["https://acme-business.co/"], "maxPagesPerSite": 2})
+        result = await crawl_site(config.websites[0], config, ChallengeClient(config))
+        self.assertEqual(result["emails"], [])
+        self.assertEqual(result["pagesChecked"], 1)
+        self.assertEqual(result["pageDiagnostics"][1]["status"], "blocked")
+        self.assertEqual(result["pageDiagnostics"][1]["url"], "https://acme-business.co/contact")
+        self.assertEqual(result["pageDiagnostics"][1]["finalUrl"], "https://acme-business.co/contact-us")
+        self.assertEqual(result["pageDiagnostics"][1]["httpStatus"], 200)
+
     async def test_merge_dedupe_failures_and_page_limit(self):
         config = RunConfig.from_dict({"websites": ["https://acme.example", "https://www.acme.example/path", "https://blocked.example"], "maxPagesPerSite": 2})
         report = await crawl_sites(config, client_factory=FakeClient)

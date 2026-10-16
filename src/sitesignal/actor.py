@@ -15,7 +15,7 @@ async def run_actor() -> None:
     from apify import Actor
 
     from .crawler import crawl_sites
-    from .output import results_csv
+    from .output import contact_records, contacts_csv, crm_company_records, crm_companies_csv, results_csv
 
     async with Actor:
         raw_input = await Actor.get_input() or {}
@@ -99,6 +99,13 @@ async def run_actor() -> None:
         await Actor.set_value("DIAGNOSTICS", report.get("diagnostics", []))
         await Actor.set_value("RESULTS", saved)
         await Actor.set_value("results.csv", results_csv(saved), content_type="text/csv; charset=utf-8")
+        # These are alternate views of saved websites, never extra billed items.
+        contacts = contact_records(saved)
+        companies = crm_company_records(saved)
+        await Actor.set_value("CONTACTS", contacts)
+        await Actor.set_value("CRM_COMPANIES", companies)
+        await Actor.set_value("contacts.csv", contacts_csv(contacts), content_type="text/csv; charset=utf-8")
+        await Actor.set_value("crm-companies.csv", crm_companies_csv(companies), content_type="text/csv; charset=utf-8")
         await Actor.set_value("OUTPUT", report)
         ending = " Budget limit reached." if budget_reached else ""
         Actor.status_message = f"Saved {len(saved)} enriched websites.{ending}"

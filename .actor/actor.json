@@ -2,8 +2,8 @@
   "actorSpecification": 1,
   "name": "business-website-contact-tech-scraper",
   "title": "Website Contact & Tech Scraper | SiteSignal",
-  "description": "Turn business website URLs into observed emails, phones, social profiles, contact pages and technology signals, with source evidence. No guessed or verified contacts.",
-  "version": "0.1",
+  "description": "Enrich business websites with observed contacts, social profiles and technology evidence. Export CRM company CSV and contact rows with page sources, plus per-page diagnostics. No guessed or verified contacts.",
+  "version": "0.2",
   "buildTag": "latest",
   "dockerfile": "../Dockerfile",
   "dockerContextDir": "..",
@@ -18,4 +18,3 @@
   "maxMemoryMbytes": 1024,
   "usesStandbyMode": false
 }
-

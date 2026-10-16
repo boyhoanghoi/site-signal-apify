@@ -15,6 +15,8 @@ enrichment, partner research or spreadsheet review.
 - Contact forms observed on the fetched pages.
 - Recognizable CMS, ecommerce, analytics and payment technology signatures.
 - Evidence containing the observed value, source URL and extraction method.
+- Flat company-field and contact exports for CRM mapping, with source pages.
+- Per-page crawl diagnostics so a failed contact page is visible separately from a successful homepage.
 
 Emails are observed addresses; mailbox existence and deliverability are not
 verified. Phones are published observations. SiteSignal does not guess either
@@ -28,8 +30,10 @@ or verified inventory of a company's software.
 1. Add business website URLs in the Input tab.
 2. Start with a few domains and the default three-page budget.
 3. Run the Actor and inspect the contacts and evidence dataset views.
-4. Export JSON, CSV or Excel using Apify's dataset tools. For a flat,
-   spreadsheet-safe file, choose **Download spreadsheet-safe CSV** in the outputs.
+4. Choose **Company fields for CRM mapping** in the outputs for one flat row per
+   saved website. Choose **All retained contacts and source pages** for one row per
+   email, phone, social link or contact-form page. CSV and lossless JSON are provided.
+   The regular dataset and spreadsheet-safe website CSV remain available.
 
 The prefilled sample uses Python, Django and the Electronic Frontier Foundation.
 These are real public websites, not paying customers or endorsements. Some pages
@@ -68,12 +72,36 @@ The default dataset contains one row per successfully processed website:
 | `technologies` | Technology names, categories, evidence and source URLs |
 | `evidence` | Contact values, source URLs and extraction methods |
 | `pagesVisited`, `pagesChecked`, `observedAt` | Observation scope and time |
+| `pagesAttempted`, `pageDiagnostics` | Attempt count and each requested page's status, final URL when available, HTTP status and failure message |
+| `contactPageLimitReached` | True when the attempt limit left discovered same-site contact links unvisited; false does not imply a whole-site crawl |
 | `status`, `warnings` | Result status and crawl limitations |
 
 Failed websites are separate, nonbillable diagnostics. The Output tab includes a
 run summary, diagnostics, a complete JSON report and spreadsheet-safe CSV.
 Statuses can include `blocked`, `timeout`, `robots_disallowed`, `http_error` and
 `network_error`. Check diagnostics when reconciling an input list.
+
+### Company and contact exports
+
+`CRM_COMPANIES` / `crm-companies.csv` contain published company name, domain,
+website, email, phone, source URLs, one link per social platform, contact-page
+and form-page URLs, and technology names. Select the columns you want when
+mapping your own CRM import. Company names are left empty when no published
+organization name was found. The single email and phone are the first values
+in deterministic alphabetical order, not a recommendation, ownership check or
+deliverability result. Counts show when more contacts exist.
+
+`CONTACTS` / `contacts.csv` retain all exported website contacts, with type,
+platform, value, source pages and extraction methods. Email spelling variants
+are deduplicated case-insensitively within a website; source evidence is kept.
+The same contact on two different websites remains two observations. These
+alternate exports use only saved website results and add no paid events.
+
+CSV files escape formula-like values with an apostrophe; this includes a phone
+beginning with `+`. Use the JSON versions to preserve exact contact strings in
+an automated CRM integration. All contacts are marked `not_verified`. Review
+the source pages and your CRM mapping before importing. No CRM is modified by
+this Actor, and no messages or contact forms are submitted.
 
 ## Pricing and limits
 

@@ -76,6 +76,10 @@ The default dataset contains successful results. The default key-value store has
 | --- | --- |
 | `RESULTS` | JSON list of saved successful website rows |
 | `results.csv` | Spreadsheet-safe CSV of those same rows |
+| `CRM_COMPANIES` | Flat company-field JSON for user-controlled CRM mapping, one row per saved website |
+| `crm-companies.csv` | Spreadsheet-safe version of the company fields |
+| `CONTACTS` | One retained email, phone, social link or contact-form page per row, with source URLs and methods |
+| `contacts.csv` | Spreadsheet-safe version of the contact records |
 | `SUMMARY` | Counts, budget-stop state and billing information |
 | `DIAGNOSTICS` | Failed/skipped websites and request diagnostics |
 | `OUTPUT` | Complete report including the above result rows |
@@ -83,6 +87,18 @@ The default dataset contains successful results. The default key-value store has
 The output schema links these files in the Actor run's Output tab. The dataset
 has contact and evidence/technology views. CSV escapes formula-like values;
 JSON preserves source observations. Protect any exported contacts appropriately.
+
+Company/contact exports are alternate views of saved website rows, not additional
+billable results. A flat company row uses the first email/phone in deterministic
+alphabetical order; this is not a recommended or verified contact. CSV escapes
+leading `+` phone values with an apostrophe; JSON preserves exact strings for
+automated imports. No CRM is modified. See [the CRM walkthrough](CRM_WORKFLOW_VI.md).
+
+Website rows also include `pagesAttempted`, `pageDiagnostics` and
+`contactPageLimitReached`. The coverage dataset view lists failed contact URLs
+inside otherwise successful website results. The latter flag means discovered
+same-site contact links remain at the page-attempt limit, not a whole-site
+coverage guarantee. Blocked/challenge contact pages are never parsed for contacts.
 
 ## Active pay-per-event configuration
 

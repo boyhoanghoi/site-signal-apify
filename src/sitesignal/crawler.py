@@ -232,37 +232,48 @@ def merge_pages(seed: str, pages: list[tuple[Page, dict]], warnings: list[str], 
         "observedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "status": "success", "warnings": warnings,
     }
+    email_spelling: dict[str, str] = {}
     for _, data in pages:
         if not result["companyName"] and data.get("companyName"):
             result["companyName"] = data["companyName"]
-        for key in ("emails", "phones", "contactFormUrls", "contactPageUrls", "jsonLdTypes"):
+        for email in data.get("emails", []):
+            email_spelling.setdefault(email.casefold(), email)
+        for key in ("phones", "contactFormUrls", "contactPageUrls", "jsonLdTypes"):
             result[key] = sorted(set(result[key]) | set(data.get(key, [])))
         for platform, urls in data.get("socials", {}).items():
             result["socials"][platform] = sorted(set(result["socials"].get(platform, [])) | set(urls))
         for e in data.get("evidence", []):
             if not include_technology and e.get("type") == "technology":
                 continue
+            if e.get("type") == "email":
+                e = {**e, "value": email_spelling.get(e["value"].casefold(), e["value"])}
             if e not in result["evidence"]:
                 result["evidence"].append(e)
         if include_technology:
             for tech in data.get("technologies", []):
                 if not any(t["name"] == tech["name"] and t["sourceUrl"] == tech["sourceUrl"] for t in result["technologies"]):
                     result["technologies"].append(tech)
+    result["emails"] = sorted(email_spelling.values(), key=lambda value: (value.casefold(), value))
     result["hasPublicEmail"] = bool(result["emails"])
     result["hasContactForm"] = bool(result["contactFormUrls"])
     return result
 
 
+def _check_challenge(page: Page) -> None:
+    lower = page.text[:200000].lower()
+    if any(s in lower for s in ("<title>just a moment", "<title>access denied", "<title>attention required!", "<title>verify you are human")):
+        raise FetchError("blocked", "A browser challenge was returned; this tool does not bypass it.", page.status)
+
+
 async def crawl_site(url: str, config: RunConfig, client: SafeHttpClient) -> dict:
     first = await client.fetch(url)
-    lower = first.text[:200000].lower()
-    if any(s in lower for s in ("<title>just a moment", "<title>access denied", "<title>attention required!", "<title>verify you are human")):
-        raise FetchError("blocked", "A browser challenge was returned; this tool does not bypass it.")
+    _check_challenge(first)
     data = extract_page(first.text, first.url)
     pages = [(first, data)]
     pending = list(data.get("contactPageUrls", []))
     visited = {first.url, url}
     warnings: list[str] = []
+    page_diagnostics = [{"url": url, "finalUrl": first.url, "status": "success", "httpStatus": first.status}]
     attempts = 1
     while pending and attempts < config.max_pages_per_site:
         candidate = pending.pop(0)
@@ -270,21 +281,39 @@ async def crawl_site(url: str, config: RunConfig, client: SafeHttpClient) -> dic
             continue
         visited.add(candidate)
         attempts += 1
+        page = None
         try:
             candidate = validate_url(candidate)
             # Every redirect is checked for robots and public DNS by the transport.
             page = await client.fetch(candidate, scope_url=first.url)
+            visited.add(page.url)
             if not same_site(first.url, page.url):
                 warnings.append("A contact page redirected outside this website and was not extracted.")
+                page_diagnostics.append({"url": candidate, "finalUrl": page.url, "status": "offsite_redirect",
+                                         "httpStatus": page.status, "message": warnings[-1]})
                 continue
             if page.url in {p.url for p, _ in pages}:
+                page_diagnostics.append({"url": candidate, "finalUrl": page.url, "status": "duplicate_page_redirect",
+                                         "httpStatus": page.status, "message": "Redirect led to an already extracted page."})
                 continue
+            _check_challenge(page)
             extracted = extract_page(page.text, page.url)
             pages.append((page, extracted))
+            page_diagnostics.append({"url": candidate, "finalUrl": page.url, "status": "success", "httpStatus": page.status})
             pending.extend(extracted.get("contactPageUrls", []))
         except FetchError as exc:
             warnings.append(f"Contact page skipped: {exc.status}.")
-    return merge_pages(url, pages, warnings, include_technology=config.include_technology)
+            diagnostic = {"url": candidate, "status": exc.status, "message": str(exc), "httpStatus": exc.http_status}
+            if page is not None:
+                diagnostic.update({"finalUrl": page.url, "httpStatus": page.status})
+            page_diagnostics.append(diagnostic)
+    result = merge_pages(url, pages, warnings, include_technology=config.include_technology)
+    result["pagesAttempted"] = attempts
+    result["pageDiagnostics"] = page_diagnostics
+    result["contactPageLimitReached"] = attempts >= config.max_pages_per_site and any(
+        candidate not in visited and same_site(first.url, candidate) for candidate in pending
+    )
+    return result
 
 
 async def crawl_sites(

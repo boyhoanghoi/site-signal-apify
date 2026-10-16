@@ -91,6 +91,10 @@ class ActorTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(actor.writes["SUMMARY"]["budgetLimitReached"])
         self.assertEqual(actor.writes["SUMMARY"]["completedDomains"], 1)
         self.assertNotIn("two.business.co", actor.writes["results.csv"])
+        self.assertNotIn("two.business.co", actor.writes["crm-companies.csv"])
+        self.assertNotIn("two.business.co", actor.writes["contacts.csv"])
+        self.assertEqual(len(actor.writes["CONTACTS"]), 1)
+        self.assertEqual(len(actor.writes["CRM_COMPANIES"]), 1)
         self.assertEqual(len(actor.writes["DIAGNOSTICS"]), 1)
 
     async def test_zero_budget_starts_no_crawl_or_charge(self):
@@ -101,6 +105,8 @@ class ActorTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(actor.dataset, [])
         self.assertEqual(actor.events, [])
         self.assertTrue(actor.writes["SUMMARY"]["budgetLimitReached"])
+        self.assertEqual(actor.writes["CONTACTS"], [])
+        self.assertEqual(actor.writes["CRM_COMPANIES"], [])
 
     async def test_non_ppe_results_have_no_explicit_billing_event(self):
         actor = FakeActor(FakeManager(ppe=False))

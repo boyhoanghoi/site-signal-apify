@@ -13,6 +13,26 @@
       "title": "Download spreadsheet-safe CSV",
       "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/results.csv"
     },
+    "crmCompaniesCsv": {
+      "type": "string",
+      "title": "Company fields for CRM mapping (safe CSV)",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/crm-companies.csv"
+    },
+    "crmCompaniesJson": {
+      "type": "string",
+      "title": "Company fields for CRM mapping (lossless JSON)",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/CRM_COMPANIES"
+    },
+    "contactsCsv": {
+      "type": "string",
+      "title": "All retained contacts and source pages (safe CSV)",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/contacts.csv"
+    },
+    "contactsJson": {
+      "type": "string",
+      "title": "All retained contacts and sources (lossless JSON)",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/CONTACTS"
+    },
     "summary": {
       "type": "string",
       "title": "Run summary",

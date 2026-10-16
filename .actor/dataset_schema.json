@@ -21,6 +21,9 @@
       "language": {"type": "string", "title": "Declared page language"},
       "jsonLdTypes": {"type": "array", "title": "Schema.org types", "items": {"type": "string"}},
       "pagesChecked": {"type": "integer", "title": "HTML pages read"},
+      "pagesAttempted": {"type": "integer", "title": "HTML page attempts", "description": "Homepage plus attempted contact pages, including failed, blocked or duplicate-redirect attempts. Robots requests and redirect hops are not additional page attempts."},
+      "contactPageLimitReached": {"type": "boolean", "title": "More discovered contact pages remain", "description": "True when the configured page-attempt budget was reached with unvisited same-site contact links remaining. False does not mean all website pages were crawled."},
+      "pageDiagnostics": {"type": "array", "title": "Per-page results", "description": "Requested URL, final URL when available, status, HTTP status and failure message for each attempted HTML page. A successful website may have failed contact pages.", "items": {"type": "object"}},
       "pagesVisited": {"type": "array", "title": "Source pages read", "items": {"type": "string"}},
       "observedAt": {"type": "string", "title": "Observation time in UTC"},
       "status": {"type": "string", "title": "Extraction status"},
@@ -43,6 +46,20 @@
           "socials": {"label": "Social profiles", "format": "object"},
           "contactPageUrls": {"label": "Contact pages", "format": "array"},
           "pagesChecked": {"label": "Pages read", "format": "number"}
+        }
+      }
+    },
+    "coverage": {
+      "title": "Coverage and failed contact pages",
+      "transformation": {"fields": ["url", "pagesChecked", "pagesAttempted", "contactPageLimitReached", "pageDiagnostics", "warnings"]},
+      "display": {
+        "component": "table",
+        "properties": {
+          "url": {"format": "link"},
+          "pagesChecked": {"format": "number"},
+          "pagesAttempted": {"format": "number"},
+          "pageDiagnostics": {"format": "array"},
+          "warnings": {"format": "array"}
         }
       }
     },
